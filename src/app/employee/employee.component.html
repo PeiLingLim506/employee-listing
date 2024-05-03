@@ -1,0 +1,15 @@
+<div *ngIf="employee$ | async as employee">
+    <h2>{{ employee.name.first }}</h2>
+    <p>ID: {{ employee.id }}</p>
+    <ul>
+        <li *ngFor="let random of generateRandomNumbers(3, 3)">{{ random }}</li>
+    </ul>
+    <ul>
+        <li *ngFor="let saying of getSayingValues(employee.sayings, 3)">{{ saying }}</li>
+    </ul>
+
+    <button (click)="updateSayingValues(employee.sayings, 3)">Update Saying Values</button>
+    <ul>
+        <li *ngFor="let saying of sayingValues">{{ saying }}</li>
+    </ul>
+</div>
