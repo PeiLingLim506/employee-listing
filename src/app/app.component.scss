@@ -1,0 +1,16 @@
+@import '../styles.scss';
+
+.main {
+    display: flex;
+    height: 100vh;
+    background-color: $custom-light-purple;  
+    padding: 2rem;
+
+    .column-left {
+        flex: 1;
+    }
+
+    .column-right {
+        flex: 2;
+    }
+}

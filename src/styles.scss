@@ -1,1 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
+
+$custom-black: #000;
+$custom-white: #fff;
+$custom-gray: #796969;
+$custom-light-blue: aliceblue;
+$custom-light-purple: #e6ddde;
+$custom-lavender: #8d7193;
+$custom-lavender-blurry: #8d719321;
+$custom-dark-purple: #600560;
+$custom-purple: #654a4e;
+$custom-purple-2: #936393;
+
+html {
+    height: 100%; 
+
+    p {
+        margin: 0;
+    }
+
+    body {
+        height: 100%;
+        margin: 0; 
+        font: {
+            family: "Cormorant", serif;
+            size: 18px;
+        }
+
+        .heading {
+            color: $custom-purple;
+            margin-bottom: 1rem;
+            font: {
+                family: "Syne", sans-serif;
+                size: 20px;
+                weight: 700;
+            }
+        }
+
+        select {
+            padding: 0.5rem 2rem;
+            border: none;
+            background-color: $custom-purple-2;
+            color: $custom-white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .text-input {
+            height: 50px;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            padding: 0 1.5rem;
+            &:focus {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+            &::placeholder {
+                font-size: 16px;
+            }
+        }
+    }
+}

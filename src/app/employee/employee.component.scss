@@ -1,0 +1,72 @@
+@import '../../styles.scss';
+
+.emp-info {
+    padding: 0 3rem;
+    overflow: auto;
+    height: 100%;  
+    border-left: 1px solid $custom-purple;
+
+    .header {
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            margin-right: 1rem;
+            background: {
+                position: center;
+                size: cover;
+                image: url('/assets/images/color-bg.png');
+            }
+            .img {
+                height: 250px;
+            }
+        }
+
+        .name {
+            color: $custom-white;
+            font: {
+                size: 80px;
+                weight: 800;
+            }
+        }
+    }
+
+    .personal-info {
+        padding: 2rem 5rem;
+        .info-table {
+            width: 100%;
+            .key {
+                width: 30%;
+            }
+            .info {
+                color: $custom-gray;
+            }
+        }
+    }
+
+    .quotes {
+        padding: 2rem 5rem;
+        .change-btn {
+            background-color: $custom-dark-purple;
+            border: none;
+            width: 100px;
+            color: $custom-white;
+            border-radius: 6px;
+            height: 35px;
+            cursor: pointer;  
+            margin-top: 0.5rem;
+        }
+        .quote-table {
+            width: 100%;
+            .index {
+                width: 20px; 
+                text-align: center;
+                background-color: $custom-lavender;
+                color: $custom-white;
+            }
+            td {
+                border: 1px solid $custom-lavender;
+                padding: 8px;
+            }
+        }
+    }
+}

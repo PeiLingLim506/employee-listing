@@ -7,4 +7,10 @@ export interface Employee {
   gender: string;
   species: string;
   sayings: { [key: number]: string };
+  images: {
+    main: string;
+  };
+  homePlanet: string;
+  occupation: string;
+  age: string;
 }

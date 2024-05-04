@@ -13,6 +13,7 @@ export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
   @Input() selectedGender: string = 'All';
   selectedSpecies: { [key: string]: boolean } = {};
+  searchText: string = '';
 
   constructor(
     private http: HttpClient,
@@ -39,7 +40,13 @@ export class EmployeeListComponent implements OnInit {
   }
 
   get filteredEmployees(): Employee[] {
-    return this.selectedGender === 'All' ? this.employees : this.employees.filter(employee => employee.gender === this.selectedGender);
+    let filteredList = this.selectedGender === 'All' ? this.employees : this.employees.filter(employee => employee.gender === this.selectedGender);
+
+    if (this.searchText.trim() !== '') {
+      filteredList = filteredList.filter(employee => (employee.name.first + ' ' + employee.name.last).toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+
+    return filteredList;
   }
 
   onSpeciesSelectionChange(selectedSpecies: { [key: string]: boolean }): void {

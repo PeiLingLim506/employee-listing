@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { EmployeeComponent } from './employee/employee.component';
 import { UniquePipe } from './unique.pipe';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,13 @@ import { UniquePipe } from './unique.pipe';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FlexLayoutModule,
+    MatIconModule,
+    MatIcon
   ],
   providers: [
-    provideClientHydration()
+    // provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })

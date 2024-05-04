@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Employee } from './employee';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +18,7 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -32,11 +33,18 @@ export class EmployeeComponent implements OnInit {
         return of(null);
       })
     );
+
+    this.employee$.subscribe(employee => {
+      if (employee) {
+        this.updateSayingValues(employee.sayings, 3);
+      }
+    });
   }
 
   sayingValues: string[] = [];
   updateSayingValues(sayingsObj: { [key: number]: string }, numOfSayings: number): void {
     this.sayingValues = this.getSayingValues(sayingsObj, numOfSayings);
+    this.cdr.detectChanges();
   }
 
   getSayingValues(sayingsObj: { [key: number]: string }, numOfSayings: number): string[] {

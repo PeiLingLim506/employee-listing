@@ -1,15 +1,53 @@
-<div *ngIf="employee$ | async as employee">
-    <h2>{{ employee.name.first }}</h2>
-    <p>ID: {{ employee.id }}</p>
-    <ul>
-        <li *ngFor="let random of generateRandomNumbers(3, 3)">{{ random }}</li>
-    </ul>
-    <ul>
-        <li *ngFor="let saying of getSayingValues(employee.sayings, 3)">{{ saying }}</li>
-    </ul>
+<div class="emp-info" *ngIf="employee$ | async as employee">
+    <div class="header" fxLayout fxLayoutAlign="start center">
+        <div class="profile-img" fxLayout fxLayoutAlign="center center">
+            <img class="img" [src]="employee.images.main" alt="">
+        </div>
+        <p class="name">{{ employee.name.first }} {{ employee.name.last }}</p>
+    </div>
 
-    <button (click)="updateSayingValues(employee.sayings, 3)">Update Saying Values</button>
-    <ul>
-        <li *ngFor="let saying of sayingValues">{{ saying }}</li>
-    </ul>
+    <div class="personal-info">
+        <p class="heading">{{ "personal info" | uppercase }}</p>
+        <table class="info-table">
+            <tbody>
+                <tr>
+                    <td class="key" [style.fontWeight]="800">Gender :</td>
+                    <td class="info">{{ employee.gender }}</td>
+                </tr>
+                <tr>
+                    <td [style.fontWeight]="800">Species :</td>
+                    <td class="info">{{ employee.species }}</td>
+                </tr>
+                <tr>
+                    <td [style.fontWeight]="800">Home Planet :</td>
+                    <td class="info">{{ employee.homePlanet }}</td>
+                </tr>
+                <tr>
+                    <td [style.fontWeight]="800">Occupation :</td>
+                    <td class="info">{{ employee.occupation }}</td>
+                </tr>
+                <tr>
+                    <td [style.fontWeight]="800">Age :</td>
+                    <td class="info">{{ employee.age }}</td>
+                </tr>
+                <tr>
+                    <td [style.fontWeight]="800">ID :</td>
+                    <td class="info">{{ employee.id }}</td>
+                </tr>
+            </tbody>
+        </table>          
+    </div>
+
+    <div class="quotes">
+        <p class="heading">{{ "quotes" | uppercase }}</p>
+        <table class="quote-table">
+            <tr *ngFor="let saying of sayingValues; let i = index;">
+                <td class="index">{{ i + 1 }}</td>
+                <td>{{ saying }}</td>
+            </tr>
+        </table>
+        <div [style.text-align]="'end'">
+            <button class="change-btn" (click)="updateSayingValues(employee.sayings, 3)">{{ "change" | uppercase }}</button>
+        </div>
+    </div>
 </div>

@@ -1,33 +1,42 @@
-<div>
-    <div>
-        <label for="gender">Filter by Gender:</label>
-        <select [(ngModel)]="selectedGender">
-            <option value="All">All</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
+<div class="emp-list">
+    <div class="filter-box">
+        <p class="category">Employees</p>
+        <input class="text-input" type="text" [(ngModel)]="searchText" placeholder="Search by name ...">
+        <div>
+            <select [(ngModel)]="selectedGender">
+                <option value="All">Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
     </div>
-    <ul>
-        <li *ngFor="let employee of filteredEmployees">
-            <a [href]="'/employee/' + employee.id">{{ employee.name.first }} - {{ employee.gender }}</a>
-        </li>
-    </ul>
-</div>
 
-<div>
+    <div>
+        <div class="employee" *ngFor="let employee of filteredEmployees; let i = index;" [ngClass]="{ 'even-background': (i+1) % 2 === 0 }" fxLayout fxLayoutAlign="start center">
+            <div class="emp-head">
+                <img [style.width]="'100%'" [src]="employee.images.main" alt="">
+            </div>
+            <div [style.paddingLeft]="'1rem'">
+                <a [href]="'/employee/' + employee.id">{{ employee.name.first }} {{ employee.name.last }}</a>
+                <p class="emp-occupation">{{ employee.occupation }}</p>
+            </div>
+        </div>
+    </div>
+
     <label for="species">Filter by species:</label>
     <div *ngFor="let employee of employees | unique:'species'">
         <input type="checkbox" [(ngModel)]="selectedSpecies[employee.species]" (change)="onSpeciesSelectionChange(employee.species)">
         <label>{{ employee.species }}</label>
     </div>
-</div>
-  
-<div *ngFor="let employee of employees">
-    <h2>{{ employee.name.first }}</h2>
-    <p>ID: {{ employee.id }}</p>
-    <a [href]="'/employee/' + employee.id">{{ employee.name.first }}</a>
-    <button (click)="navigateToEmployeeDetails(employee.id)">{{ employee.name.first }}</button>
-    <div class="clickable-div" routerLink="/employee/{{ employee.id }}" style="border: 1px solid;width: 100px;">
-        {{ employee.name.first }}
-    </div>
+
+<!-- 
+    <div *ngFor="let employee of employees">
+        <h2>{{ employee.name.first }}</h2>
+        <p>ID: {{ employee.id }}</p>
+        <a [href]="'/employee/' + employee.id">{{ employee.name.first }}</a>
+        <button (click)="navigateToEmployeeDetails(employee.id)">{{ employee.name.first }}</button>
+        <div class="clickable-div" routerLink="/employee/{{ employee.id }}" style="border: 1px solid;width: 100px;">
+            {{ employee.name.first }}
+        </div>
+    </div> -->
 </div>
