@@ -1,42 +1,40 @@
 <div class="emp-list">
     <div class="filter-box">
         <p class="category">Employees</p>
-        <input class="text-input" type="text" [(ngModel)]="searchText" placeholder="Search by name ...">
-        <div>
-            <select [(ngModel)]="selectedGender">
-                <option value="All">Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
+        <div fxLayout>
+            <input class="text-input" type="text" [(ngModel)]="searchText" placeholder="Search by name ...">
         </div>
-    </div>
-
-    <div>
-        <div class="employee" *ngFor="let employee of filteredEmployees; let i = index;" [ngClass]="{ 'even-background': (i+1) % 2 === 0 }" fxLayout fxLayoutAlign="start center">
-            <div class="emp-head">
-                <img [style.width]="'100%'" [src]="employee.images.main" alt="">
+        <div fxLayout>
+            <div fxLayout [style.width]="'40%'">
+                <mat-select [(ngModel)]="selectedGender" [style.margin-right]="'.4rem'">
+                    <mat-option value="All">Gender</mat-option>
+                    <mat-option value="Male">Male</mat-option>
+                    <mat-option value="Female">Female</mat-option>
+                </mat-select>
             </div>
-            <div [style.paddingLeft]="'1rem'">
-                <a [href]="'/employee/' + employee.id">{{ employee.name.first }} {{ employee.name.last }}</a>
-                <p class="emp-occupation">{{ employee.occupation }}</p>
+            <div fxLayout [style.width]="'60%'">
+                <mat-select placeholder="Species" [(ngModel)]="selectedSpecies" multiple>
+                    <mat-select-trigger>Species</mat-select-trigger>
+                    <mat-option *ngFor="let employee of employees | unique:'species'" [value]="employee.species">{{ employee.species }}</mat-option>
+                </mat-select>              
+            </div> 
+        </div>  
+        <div [style.text-align]="'end'">
+            <button class="btn" (click)="clearFilters()">Clear Filters</button>
+        </div>       
+    </div>
+
+    <div [style.height]="'100%'">
+        <div class="scroll-list">
+            <div (click)="navigateToEmployeeDetails(employee.id)" class="employee" *ngFor="let employee of filteredEmployees; let i = index;" [ngClass]="{ 'even-background': (i+1) % 2 === 0 }" fxLayout fxLayoutAlign="start center">
+                <div class="emp-head">
+                    <img [style.width]="'100%'" [src]="employee.images.main" alt="">
+                </div>
+                <div [style.paddingLeft]="'1rem'">
+                    <p [style.font-weight]="600">{{ employee.name.first }} {{ employee.name.last }}</p>
+                    <p class="emp-occupation">{{ employee.occupation }}</p>
+                </div>
             </div>
         </div>
     </div>
-
-    <label for="species">Filter by species:</label>
-    <div *ngFor="let employee of employees | unique:'species'">
-        <input type="checkbox" [(ngModel)]="selectedSpecies[employee.species]" (change)="onSpeciesSelectionChange(employee.species)">
-        <label>{{ employee.species }}</label>
-    </div>
-
-<!-- 
-    <div *ngFor="let employee of employees">
-        <h2>{{ employee.name.first }}</h2>
-        <p>ID: {{ employee.id }}</p>
-        <a [href]="'/employee/' + employee.id">{{ employee.name.first }}</a>
-        <button (click)="navigateToEmployeeDetails(employee.id)">{{ employee.name.first }}</button>
-        <div class="clickable-div" routerLink="/employee/{{ employee.id }}" style="border: 1px solid;width: 100px;">
-            {{ employee.name.first }}
-        </div>
-    </div> -->
 </div>

@@ -2,15 +2,43 @@
 
 .main {
     display: flex;
+    flex-direction: row;
     height: 100vh;
     background-color: $custom-light-purple;  
-    padding: 2rem;
+
+    @media screen and (min-width: 1400px) {
+        padding: 2rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1399px) {
+        padding: 1rem;
+    }
+    @media screen and (max-width: 767px) {
+        padding: 1rem;
+        flex-direction: column;
+        height: auto;
+    }
 
     .column-left {
-        flex: 1;
+        @media screen and (min-width: 992px) {
+            width: 30%;
+        }
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            width: 40%;
+        }
+        @media screen and (max-width: 767px) {
+            width: 100%;
+        }
     }
 
     .column-right {
-        flex: 2;
+        @media screen and (min-width: 992px) {
+            width: 70%;
+        }
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            width: 60%;
+        }
+        @media screen and (max-width: 767px) {
+            width: 100%;
+        }
     }
 }

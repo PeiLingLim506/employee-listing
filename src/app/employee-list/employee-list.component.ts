@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
   @Input() selectedGender: string = 'All';
-  selectedSpecies: { [key: string]: boolean } = {};
+  selectedSpecies: string[] = [];
   searchText: string = '';
 
   constructor(
@@ -36,11 +36,17 @@ export class EmployeeListComponent implements OnInit {
   }
 
   navigateToEmployeeDetails(empId: number): void {
-    this.router.navigate(['/employee', empId]);
+    this.router.navigate(['/employee', empId]).then(() => {
+      window.location.href = window.location.href;
+    });
   }
 
   get filteredEmployees(): Employee[] {
     let filteredList = this.selectedGender === 'All' ? this.employees : this.employees.filter(employee => employee.gender === this.selectedGender);
+
+    if (this.selectedSpecies.length > 0) {
+      filteredList = filteredList.filter(employee => this.selectedSpecies.includes(employee.species));
+    }
 
     if (this.searchText.trim() !== '') {
       filteredList = filteredList.filter(employee => (employee.name.first + ' ' + employee.name.last).toLowerCase().includes(this.searchText.toLowerCase()));
@@ -49,7 +55,9 @@ export class EmployeeListComponent implements OnInit {
     return filteredList;
   }
 
-  onSpeciesSelectionChange(selectedSpecies: { [key: string]: boolean }): void {
-    this.selectedSpecies = selectedSpecies;
+  clearFilters(): void {
+    this.selectedGender = 'All';
+    this.selectedSpecies = [];
+    this.searchText = '';
   }
 }
